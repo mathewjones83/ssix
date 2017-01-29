@@ -1,32 +1,3 @@
 # ssix
 ssix_analysis
 
-# Connect to server
-ssh ubuntu@137.205.69.125
-
-# Unzip fastq file
-gunzip read1.fastq read2.fastq
-
-# QC for adapters
-fastqc read1.fastq read2.fastq
-
-# Trim adapters
-java -jar ~/sureselect/Surecall.........blahblahblah -fq1 full/path/to/read1.fastq -fq2 full/path/to/read2.fastq -xt
-
-# QC for trimmed adapters
-fastqc read1_trimmed.fastq read2_trimmed.fastq
-
-# BWA alignment
-bwa mem -M ~/sureselect/reference/K03455.1 trimread1.fastq trimread2.fastq > trim_alignment.sam
-
-# Convert sam to sorted bam
-samtools view -bS trim_alignment.sam | samtools sort -O BAM -o trim_alignment_sort.bam
-
-# Remove PCR duplicates
-rmdup -sS trim_alignment_sort.bam trim_alignment_sort_dedup.bam
-
-# Index deduped bam
-samtools index trim_alignment_sort_dedup.bam trim_alignment_sort_deduped.bai
-
-# Save needed files from server to local comp
-scp ubuntu@137.205.69.125:~/sureselect/ssviii/data/SSVIII-4-38633554/ssviii_4_bwaalign_dedup* ~/Desktop/ssviii_test/
