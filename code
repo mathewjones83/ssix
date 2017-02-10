@@ -20,7 +20,7 @@ bwa mem -M ~/sureselect/reference/K03455.1 trimread1.fastq trimread2.fastq > tri
 samtools view -bS trim_alignment.sam | samtools sort -O BAM -o trim_alignment_sort.bam
 
 # Remove PCR duplicates
-rmdup -sS trim_alignment_sort.bam trim_alignment_sort_dedup.bam
+samtools rmdup -sS trim_alignment_sort.bam trim_alignment_sort_dedup.bam
 
 # Index deduped bam
 samtools index trim_alignment_sort_dedup.bam trim_alignment_sort_deduped.bai
