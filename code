@@ -27,3 +27,7 @@ samtools index trim_alignment_sort_dedup.bam trim_alignment_sort_deduped.bai
 
 # Save needed files from server to local comp
 scp ubuntu@137.205.69.125:~/sureselect/ssviii/data/SSVIII-4-38633554/ssviii_4_bwaalign_dedup* ~/Desktop/ssviii_test/
+
+# Pileup and call SNPs
+
+ samtools mpileup -uf ../../../reference/K03455.1.fasta  | bcftools call -mv -Oz > ssviii_8_samsnp.vcf.gz
